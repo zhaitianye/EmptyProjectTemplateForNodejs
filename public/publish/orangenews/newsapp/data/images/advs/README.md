@@ -1,0 +1,3 @@
+layerfullscreen 弹出层部分的广告部分都放置在里面
+
+majorterm 所有页面层的广告部分放置在这里面，分好层级关系

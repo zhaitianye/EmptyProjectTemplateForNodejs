@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>测试路由</h1>
+    <p>
+        这里是文件名
+        <input class="qqqq" type="text">
+    </p>
+
+    <p contenteditable="true">asdfsadfdasfasdfsdafadf</p>
+
+    <button class="llll" style="width: 300px;height: 50px;line-height: 50px;font-size: 26px;text-align: center; cursor: pointer;">点我</button>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="axios.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $(".llll").click(function() {
+            var txt1="<p>文本。</p>";              
+            var txt2=$("<p></p>").text("文本。");  
+            var txt3=document.createElement("p");
+            txt3.innerHTML="文本。";     
+            $("[contenteditable]").removeAttr("contenteditable");          
+            $("body").prepend(txt1,txt2,txt3);
+            $('.qqqq').attr("value","http://www.runoob.com/jquery");
+
+            var xx = $('html').html();
+
+            var strVar="";
+            strVar += "<!DOCTYPE html>";
+            strVar += "<html>";
+            strVar += xx;
+            strVar += "<\/html>";
+
+            var blob = new Blob([strVar], {type: 'text/html'});
+            
+            var formData = new FormData();
+            formData.append('file', blob, Date.now() + '.html');
+            //formData.append('metadata', JSON.stringify(metadata));
+            //return formData;
+            console.log(formData);
+
+
+            // var reader = new FileReader();
+            // reader.readAsText(blob, 'utf-8');
+            // reader.onload = function (e) {
+            //     console.info(reader.result);
+            // }
+
+            
+        });
+        $(".kkkk").click(function() {
+            var gif_file_name = $(".qqqq").val();
+            var info = {
+                "filename": gif_file_name
+            }
+            var metadata = {
+                "info": {
+                    "ch_name": "把信息转发给固定邮件",
+                    "router": "/interface/H5/send_info_email",
+                    "operation": "SendEmail",
+                },
+                "condition": {
+                    "db_type": "null",
+                    "ch_db_name": "null",
+                    "view": "null",
+                    "fields": info,
+                    "filter": "",
+                    "search": ""
+                },
+                "res_content": {
+                    "res_success": false,
+                    "res_message": "无",
+                    "res_code": 200,
+                    "res_data": {}
+                }
+            };
+            axios.post('http://127.0.0.1:9080', metadata).then(function(response) {
+                console.log(response);
+            }).catch(function(error) {
+                console.log(error);
+            });
+        });
+        
+
+
+    });
+    </script>
+</body>
+
+</html>
